@@ -20,7 +20,7 @@ WORKDIR /app
 
 # Create a non-privileged user that the app will run under.
 # See https://docs.docker.com/go/dockerfile-user-best-practices/
-ARG UID=10001
+
 RUN adduser \
     --disabled-password \
     --gecos "" \
@@ -38,9 +38,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     --mount=type=bind,source=requirements.txt,target=requirements.txt \
     python -m pip install -r requirements.txt
 
-# Switch to the non-privileged user to run the application.
-USER 10014
-
 # Copy the source code into the container.
 COPY . .
 
@@ -49,3 +46,6 @@ EXPOSE 8000
 
 # Run the application.
 CMD gunicorn 'main:app' --bind=0.0.0.0:8000
+
+# Switch to the non-privileged user to run the application.
+USER 10014
