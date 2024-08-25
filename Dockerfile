@@ -47,5 +47,5 @@ EXPOSE 8000
 # Run the application.
 CMD gunicorn 'main:app' --bind=0.0.0.0:8000
 
-# Switch to the non-privileged user to run the application.
+# Switch to the non-privileged user.
 USER 10014
