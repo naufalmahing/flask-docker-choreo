@@ -1,6 +1,17 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, session
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
+
+@app.route('/set-session/<username>')
+def set_user(username):
+    session['username'] = username
+    return {'msg': 'success', 'username': username}
+
+@app.route('/get-session')
+def get_user():
+    return 'hello there ' + session['username'] if session['username'] else 'there\'s no user'
 
 @app.route('/', methods=['GET'])
 def index():
