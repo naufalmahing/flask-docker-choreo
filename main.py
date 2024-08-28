@@ -2,6 +2,8 @@ from flask import Flask, jsonify, session
 from flask_cors import CORS
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'slkdfjsSDFSDFSDKFLLNNU'
 CORS(app, supports_credentials=True)
 
 @app.route('/set-session/<username>')

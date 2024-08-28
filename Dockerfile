@@ -16,6 +16,10 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # the application crashes without emitting any logs due to buffering.
 ENV PYTHONUNBUFFERED=1
 
+# update krb5 library
+RUN apt-get update
+RUN apt-get install krb5-kdc -y
+
 WORKDIR /app
 
 # Create a non-privileged user that the app will run under.
