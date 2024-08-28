@@ -19,6 +19,7 @@ ENV PYTHONUNBUFFERED=1
 # update krb5 library
 RUN apt-get update
 RUN apt-get install krb5-kdc -y
+RUN apt-get install libk5crypto3
 
 WORKDIR /app
 
