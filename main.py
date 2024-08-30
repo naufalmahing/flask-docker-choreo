@@ -22,7 +22,7 @@ def index():
 
 @app.route('/write/<input>')
 def write(input):
-    f = open('./tmp/demo.txt', 'w')
+    f = open('/tmp/demo.txt', 'w')
     f.write(input)
     f.close()
     
@@ -32,11 +32,11 @@ def write(input):
 def add():
     data = request.json.get('data')
 
-    f = open('./tmp/demo.txt', 'a')
+    f = open('/tmp/demo.txt', 'a')
     f.write('\n'+ data)
     f.close()
 
-    f = open('./tmp/demo.txt', 'r')
+    f = open('/tmp/demo.txt', 'r')
     lines = f.readlines()
     s = '\n'.join(lines)
     return {'code': 200, 'msg': 'berhasil tambah', 'data': s}
