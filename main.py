@@ -7,6 +7,11 @@ app.config['SECRET_KEY'] = 'slkdfjsSDFSDFSDKFLLNNU'
 CORS(app, supports_credentials=True)
 # CORS(app, supports_credentials=True, origins=['http://localhost:3001'])
 
+@app.route('/login', methods=['POST'])
+def set_user():
+    session['username'] = request.json.get('username')
+    return {'msg': 'success', 'username': username}
+    
 @app.route('/set-session/<username>')
 def set_user(username):
     session['username'] = username
