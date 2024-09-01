@@ -8,7 +8,7 @@ CORS(app, supports_credentials=True)
 # CORS(app, supports_credentials=True, origins=['http://localhost:3001'])
 
 @app.route('/login', methods=['POST'])
-def set_user():
+def login():
     session['username'] = request.json.get('username')
     return {'msg': 'success', 'username': username}
     
