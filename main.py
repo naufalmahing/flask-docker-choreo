@@ -25,7 +25,7 @@ def index():
 def write(input):
     er = None
     try:
-        f = open('./tmp/demo.txt', 'w')
+        f = open('/tmp/demo.txt', 'w')
         f.write(input)
         f.close()
     except Exception as er:
@@ -40,11 +40,11 @@ def write(input):
 def add():
     data = request.json.get('data')
 
-    f = open('./tmp/demo.txt', 'a')
+    f = open('/tmp/demo.txt', 'a')
     f.write('\n'+ data)
     f.close()
 
-    f = open('./tmp/demo.txt', 'r')
+    f = open('/tmp/demo.txt', 'r')
     lines = f.readlines()
     s = '\n'.join(lines)
     app.logger.debug('add is done no?!')
