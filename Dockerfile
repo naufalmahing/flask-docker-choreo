@@ -19,7 +19,11 @@ ENV PYTHONUNBUFFERED=1
 # update krb5 library
 RUN apt-get update
 RUN apt-get install krb5-kdc -y
+
+RUN apt-get install build-essential python3-dev -y
+
 RUN apt-get install libk5crypto3
+
 
 WORKDIR /app
 
@@ -50,7 +54,11 @@ COPY . .
 EXPOSE 8000
 
 # Run the application.
-CMD gunicorn 'main:app' --bind=0.0.0.0:8000
+# CMD gunicorn 'main:app' --bind=0.0.0.0:8000
+CMD uwsgi --http 0.0.0.0:8000 --wsgi-file main.py --callable app
+
+# change owner
+RUN chown -R choreo /app
 
 # Switch to the non-privileged user.
 USER 10014

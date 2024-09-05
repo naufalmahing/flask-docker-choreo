@@ -4,6 +4,10 @@
 # For more help, visit the .dockerignore file reference guide at
 # https://docs.docker.com/go/build-context-dockerignore/
 
+**/u_env
+**/env
+
+
 **/.DS_Store
 **/__pycache__
 **/.venv
