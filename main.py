@@ -1,3 +1,7 @@
+import logging
+import sys
+logging.basicConfig(stream=sys.stdout, level=logging.INFO, force=True)
+
 from flask import Flask, jsonify, session, request
 from flask_cors import CORS
 import flask_cors
@@ -21,8 +25,19 @@ def get_user():
 def index():
     return jsonify({'data': 'this is aku'})
 
+# update flask cors root logger
+# flask_cors_rootlogger = flask_cors.rootlogger
+flask_cors.rootlogger.removeHandler(flask_cors.rootlogger.handlers[0])
+flask_cors.rootlogger.addHandler(logging.StreamHandler(stream=sys.stdout))
+flask_cors.rootlogger.setLevel(logging.DEBUG)
+
 @app.route('/write/<input>')
 def write(input):
+    # try logging
+    flask_cors.rootlogger.debug('domo flask cors deesu')
+    print('flask cors logger handlers', flask_cors.rootlogger.handlers)
+    app.logger.debug('this is flask app')
+
     er = None
     try:
         f = open('/tmp/demo.txt', 'w')
@@ -47,12 +62,14 @@ def add():
     f = open('/tmp/demo.txt', 'r')
     lines = f.readlines()
     s = '\n'.join(lines)
-    # app.logger.debug('add is done no?!')
+    app.logger.debug('add is done no?!')
+    # print(flask_cors.rootlogger.handlers)
+    # flask_cors.rootlogger.removeHandler(flask_cors.rootlogger.handlers[0])
+    # print(flask_cors.rootlogger.handlers)
+    # flask_cors.rootlogger.addHandler(logging.StreamHandler(stream=sys.stdout))
+    # flask_cors.rootlogger.setLevel(logging.INFO)
+    # flask_cors.rootlogger.debug('this is the new flask cors')
     return {'code': 200, 'msg': 'berhasil tambah', 'data': s}
-
-# import logging
-# import sys
-# logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 # handler = logging.StreamHandler(stream=sys.stdout)
 # handler.setLevel(logging.DEBUG)
