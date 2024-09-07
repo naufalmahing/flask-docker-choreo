@@ -8,6 +8,8 @@ import flask_cors
 
 from flask_jwt_extended import create_access_token, jwt_required, JWTManager, set_access_cookies, unset_jwt_cookies
 
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
@@ -20,12 +22,14 @@ app.config["JWT_TOKEN_LOCATION"] = ["headers", "cookies", "json", "query_string"
 app.config["JWT_COOKIE_SECURE"] = False
 
 # Change this in your code!
-app.config["JWT_SECRET_KEY"] = "super-secret"
+app.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET_KEY')
 
 jwt = JWTManager(app)
 
-app.config['SECRET_KEY'] = 'slkdfjsSDFSDFSDKFLLNNU'
-CORS(app, supports_credentials=True)
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
+CORS(app, supports_credentials=False)
+# CORS(app, supports_credentials=True)
 # CORS(app, supports_credentials=True, origins=['http://localhost:3001'])
 
 @app.route("/login_without_cookies", methods=["POST"])
