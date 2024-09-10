@@ -11,6 +11,8 @@ from flask_jwt_extended import create_access_token, jwt_required, JWTManager, se
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+
 app = Flask(__name__)
 
 # Here you can globally configure all the ways you want to allow JWTs to

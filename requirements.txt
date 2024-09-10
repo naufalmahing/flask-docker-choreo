@@ -2,4 +2,4 @@ gunicorn
 flask
 flask-cors
 flask-jwt-extended
-dotenv
+python-dotenv
